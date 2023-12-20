@@ -1,69 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        
-        h1 {
-            color: #333;
-        }
-        
-        p {
-            color: #666;
-        }
-        
-        #countdown {
-            font-size: 2em;
-            color: #ff6600;
-            font-weight: bold;
-        }
-    </style>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGRYJLHC5Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EGRYJLHC5Q');
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;800&display=swap" rel="stylesheet">  
+  <title>Finni | Infinite creativity coming soon</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #ffffff;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #F10266;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+    }
+    
+    .logo {
+      width:42%;
+      max-width: 200px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    a {
+      text-decoration: none;
+      color: #F10266;
+    }
+
+    a:hover {
+      color: #9E0059;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      will-change: transform, width, height;
+      background: radial-gradient(circle at 30% 30%, #F10266, #1E1D5B);
+      transition: transform 0.5s, width 0.5s, height 0.5s;
+
+    }
+    
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Coming Soon!</h1>
-        <p>We're working hard to bring you something awesome. Stay tuned!</p>
-        <div id="countdown"></div>
-    </div>
+   <!-- Logo at the top -->
+   <img class="logo" src="media/finnidesign-logo.svg" alt="Your Logo">
 
-    <script>
-        // Set the date we're counting down to (replace with your launch date)
-        var countDownDate = new Date("Jan 1, 2024 00:00:00").getTime();
+   <!-- Image below the logo -->
+   <img src="media/creativity.png" alt="Your Image">
+ 
+   <!-- Extra bold text saying 'Coming soon' below the image -->
+   <h1>Coming soon</h1>
+ 
+   <!-- Medium text saying '@finnidesign' at the bottom -->
+   <h2><a href="https://www.instagram.com/finnidesign/">@finnidesign</a></h2>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const numberOfBlobs = 4;
+      const blobs = [];
 
-        // Update the countdown every 1 second
-        var x = setInterval(function() {
-            var now = new Date().getTime();
-            var distance = countDownDate - now;
+      for (let i = 0; i < numberOfBlobs; i++) {
+        createBlob();
+      }
 
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      function createBlob() {
+        const blob = document.createElement("div");
+        blob.className = "blob";
+        document.body.appendChild(blob);
+        resetBlob(blob);
+        blobs.push(blob);
+      }
 
-            document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
-            + minutes + "m " + seconds + "s ";
+      function resetBlob(blob) {
+        const size = Math.random() * 50 + 10;
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "EXPIRED";
-            }
-        }, 1000);
-    </script>
+        blob.style.width = size + "px";
+        blob.style.height = size + "px";
+        blob.style.transform = `translate(${x}px, ${y}px)`;
+        blob.size = size;
+        blob.speed = { x: (Math.random() - 0.5) * 2, y: (Math.random() - 0.5) * 2 };
+      }
+
+      function updateBlobs() {
+        blobs.forEach(blob => {
+          blob.style.transform = `translate(${blob.speed.x}px, ${blob.speed.y}px) ${blob.style.transform}`;
+
+          if (Math.random() > 0.995) {
+            // Randomly change blob size
+            blob.style.width = blob.style.height = blob.size * (Math.random() * 0.5 + 2) + "px";
+          }
+
+          const mouseX = window.innerWidth / 2;
+          const mouseY = window.innerHeight / 2;
+          const deltaX = mouseX - parseFloat(blob.style.left);
+          const deltaY = mouseY - parseFloat(blob.style.top);
+          const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+          const directionX = deltaX / distance;
+          const directionY = deltaY / distance;
+
+          const speed = 0.5; // Adjust the speed for a smoother effect
+
+          blob.speed.x += directionX * speed;
+          blob.speed.y += directionY * speed;
+
+          const isOutsideViewport =
+            parseFloat(blob.style.left) < 0 ||
+            parseFloat(blob.style.left) > window.innerWidth ||
+            parseFloat(blob.style.top) < 0 ||
+            parseFloat(blob.style.top) > window.innerHeight;
+
+          if (isOutsideViewport || Math.random() > 0.995) {
+            // Reset blob if outside viewport or randomly
+            resetBlob(blob);
+          }
+        });
+
+        requestAnimationFrame(updateBlobs);
+      }
+
+      updateBlobs();
+    });
+  </script>
 </body>
 </html>
